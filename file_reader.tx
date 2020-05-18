@@ -1,0 +1,10 @@
+// Each command line argument is assumed to be a filename, the file is opened and printed to stdout.
+// API's that do not come from the web are all contained in the "Deno" global doc.deno.land
+// needs the --allow-read permission to run
+// IE: deno run --allow-read file_reader.tx sampletext.txt
+for (let i = 0; i < Deno.args.length; i++) {
+  let filename = Deno.args[i];
+  let file = await Deno.open(filename);
+  await Deno.copy(file, Deno.stdout);
+  file.close();
+}
